@@ -5,12 +5,8 @@
  * @returns A prettier version of that string.
  */
 const prettify = (input) => {
-  // type check
-  if (typeof input !== 'string' || input === '') return undefined;
-  // trim additional whitespace from edges
-  const trimmed = input.trim();
-  // get rid of extra spaces
-  return trimmed.replace(/\s+/g, ' ');
+  const inp = String(input).trim();
+  return inp.replace(/\ /g, ' ');
 };
 
 /** A very common problem when a non-string or empty string is provided for validation. */
@@ -227,7 +223,7 @@ const validateAll = (name, email, phone, header, message) => {
     // If it has not failed yet, all input is indeed valid.
     return {
       valid: true,
-      obj: {
+      values: {
         name: nameVal.val,
         email: emailVal.val,
         phone: phoneVal.val,
