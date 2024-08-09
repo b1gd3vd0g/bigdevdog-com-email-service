@@ -1,17 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const ENV = {};
-require('dotenv').config({
-  processEnv: ENV
-});
-const mode = ENV.MODE;
+require('dotenv').config();
+const mode = process.env.MODE;
 if (mode === 'prod') {
   require('dotenv').config({
-    processEnv: ENV,
     path: './.env.prod'
   });
 }
-console.info(ENV);
 // 1. Configure the app.
 
 const app = express();
@@ -30,7 +25,7 @@ app.use('/', require('./base_router'));
 
 // 2. Configure the server.
 let server, port;
-switch (ENV.MODE) {
+switch (process.env.MODE) {
   case 'dev':
     server = require('http').createServer(app);
     port = 6900;
@@ -38,8 +33,8 @@ switch (ENV.MODE) {
   case 'prod':
     const { readFileSync } = require('fs');
     const options = {
-      cert: readFileSync(ENV.CERT_PATH),
-      key: readFileSync(ENV.KEY_PATH)
+      cert: readFileSync(process.env.CERT_PATH),
+      key: readFileSync(process.env.KEY_PATH)
     };
     server = require('https').createServer(options, app);
     port = 6901;
