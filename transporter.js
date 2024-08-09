@@ -12,7 +12,7 @@ const transporter = createTransport(
   {
     from: `BigDevDog.com automailer <${process.env.AUTOMAILER_BDD_COM_USERNAME}>`,
     to: process.env.DEVIN_BDD_COM_EMAIL,
-    subject: 'A customer has reached out via the Contact Form on BigDevDog.com!'
+    subject: 'Someone has reached out via the Contact Form on BigDevDog.com!'
   }
 );
 
